@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   db:
     image: mysql:8.0
@@ -6,9 +5,38 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: CONCERT
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: concert
+    ports:
+      - "8080:8080"
+    environment:
+      TZ: Asia/Seoul
+    platform: linux/amd64
+    depends_on:
+      - db
+    deploy:
+      resources:
+        limits:
+          cpus: '6'    # 최대 6개의 CPU 사용
+          memory: 8GB   # 최대 8GB 메모리 사용
+        reservations:
+          cpus: '2'    # 최소 2개의 CPU 보장
+          memory: 4GB   # 최소 4GB 메모리 보장
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 volumes:
   db_data:
