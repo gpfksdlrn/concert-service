@@ -35,7 +35,7 @@ CREATE TABLE `CONCERT_SCHEDULES` (
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '일정 생성 일자',
     `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '일정 수정 일자',
     `is_delete` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '삭제 여부',
-    FOREIGN KEY (`concert_id`) REFERENCES `CONCERTS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (`concert_id`) REFERENCES `CONCERTS` (`id`)
 );
 
 -- 콘서트 좌석 테이블
@@ -49,7 +49,7 @@ CREATE TABLE `SEATS` (
     `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '좌석 정보 수정 일자',
     `is_delete` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '삭제 여부',
     UNIQUE KEY `unique_schedule_seat` (`schedule_id`, `seat_number`),-- 동일한 schedule_id 내에서 좌석 번호가 중복되지 않도록 유니크 키 추가
-    FOREIGN KEY (`schedule_id`) REFERENCES `CONCERT_SCHEDULES` (`id`) ON DELETE CASCADE
+    FOREIGN KEY (`schedule_id`) REFERENCES `CONCERT_SCHEDULES` (`id`)
 );
 
 -- 예약 테이블
@@ -62,9 +62,9 @@ CREATE TABLE `RESERVATIONS` (
     `reserved_at` DATETIME NOT NULL COMMENT '예약 일자',
     `created_at` DATETIME NOT NULL COMMENT '예약 생성 일자',
     `is_delete` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '삭제 여부',
-    FOREIGN KEY (`member_id`) REFERENCES `MEMBERS` (`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`schedule_id`) REFERENCES `CONCERT_SCHEDULES` (`id`) ON DELETE RESTRICT,
-    FOREIGN KEY (`seat_id`) REFERENCES `SEATS` (`id`) ON DELETE RESTRICT
+    FOREIGN KEY (`member_id`) REFERENCES `MEMBERS` (`id`),
+    FOREIGN KEY (`schedule_id`) REFERENCES `CONCERT_SCHEDULES` (`id`),
+    FOREIGN KEY (`seat_id`) REFERENCES `SEATS` (`id`)
 );
 
 
@@ -77,8 +77,8 @@ CREATE TABLE `PAYMENTS` (
     `status` ENUM('PROGRESS', 'DONE', 'CANCELED', 'REFUNDED') NOT NULL DEFAULT 'PROGRESS' COMMENT '결제 상태(결제 진행중/결제 완료/결제 실패/환불 완료)',
     `paid_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '결제 완료 일자',
     `is_delete` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '삭제 여부',
-    FOREIGN KEY (`reservation_id`) REFERENCES `RESERVATIONS` (`id`) ON DELETE RESTRICT,
-    FOREIGN KEY (`member_id`) REFERENCES `MEMBERS` (`id`) ON DELETE CASCADE
+    FOREIGN KEY (`reservation_id`) REFERENCES `RESERVATIONS` (`id`),
+    FOREIGN KEY (`member_id`) REFERENCES `MEMBERS` (`id`)
 );
 
 -- 알림 테이블
@@ -94,5 +94,5 @@ CREATE TABLE `NOTIFICATIONS` (
     ) NOT NULL COMMENT '알림 유형(예약 확정 알림/예약 취소 알림/결제 완료 알림/알림 전송 실패)',
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '알림 생성 일자',
     `is_delete` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '삭제 여부',
-    FOREIGN KEY (`member_id`) REFERENCES `MEMBERS` (`id`) ON DELETE CASCADE
+    FOREIGN KEY (`member_id`) REFERENCES `MEMBERS` (`id`)
 );
