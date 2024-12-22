@@ -29,31 +29,37 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	// lombok
+	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	// mysql
-	implementation 'com.mysql:mysql-connector-j'
+	// Mysql
+	runtimeOnly 'com.mysql:mysql-connector-j'
 
-	// h2
+	// H2
 	runtimeOnly 'com.h2database:h2'
 
-	// test
+	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testImplementation "org.testcontainers:junit-jupiter"
 
-	// springDocs
+	// SpringDocs
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 
-	// gson
+	// Gson
 	implementation 'com.google.code.gson:gson'
 
 	// JWT
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // JSON 처리
+
+	// Mail
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	// Redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 }
 //
 //tasks.named('test') {
