@@ -231,6 +231,8 @@ gradle-app.setting
 /gradlew.bat
 /gradle/
 /src/main/resources/application-local.yml
+/src/main/resources/application-dev.yml
+/src/main/resources/application-test.yml
 /data/
 /.settings/org.eclipse.buildship.core.prefs
 *.exe
