@@ -35,6 +35,7 @@ public class EmailSendService {
         // 토큰 생성
         String token = UUID.randomUUID().toString();
         String redisKey = REDIS_KEY_PREFIX + token;
+        email = email.trim();
         log.info("[TOKEN 생성] token={}, email={}", token, email);
 
         // Redis 데이터 저장

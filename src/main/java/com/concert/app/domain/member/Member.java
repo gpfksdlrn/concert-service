@@ -26,7 +26,7 @@ public class Member {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
     @Column(nullable = false)
@@ -36,14 +36,22 @@ public class Member {
     private String address2;
 
     @Column(nullable = false)
-    private Long balance;
+    private Long balance = 0L; // 기본 잔액 설정
 
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    @Column(nullable = false)
+    @Column(name = "is_delete", nullable = false)
     private Boolean isDelete = false;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserRoleEnum role = UserRoleEnum.USER;
+
+    public enum UserRoleEnum {
+        USER, ADMIN
+    }
 }

@@ -25,7 +25,7 @@ public class EmailSenderImpl implements EmailSender {
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(body, true);
-            helper.setFrom(username + "@gmail.com", "콘서트 예약");
+            helper.setFrom(username, "콘서트 예약");
             javaMailSender.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException("이메일 전송 중 오류가 발생했습니다.", e);
