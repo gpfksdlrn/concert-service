@@ -13,6 +13,7 @@ erDiagram
         datetime created_at "회원 생성 일자"
         datetime updated_at "회원 수정 일자"
         boolean is_delete "탈퇴 여부"
+        enum role "회원 역할 (USER, ADMIN)"
     }
 
     CONCERTS {
