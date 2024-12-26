@@ -237,3 +237,4 @@ gradle-app.setting
 /.settings/org.eclipse.buildship.core.prefs
 *.exe
 .env
+redis/data/ump.rdb
