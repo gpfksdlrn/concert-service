@@ -5,7 +5,7 @@ import com.concert.app.domain.concert.ConcertRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -14,7 +14,7 @@ public class ConcertRepositoryImpl implements ConcertRepository {
     private final ConcertJpaRepository jpaRepository;
 
     @Override
-    public List<Concert> findActiveConcerts(LocalDateTime now) {
+    public List<Concert> findActiveConcerts(LocalDate now) {
         return jpaRepository.findActiveConcerts(now);
     }
 }

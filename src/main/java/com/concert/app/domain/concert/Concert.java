@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,10 +28,10 @@ public class Concert {
     private String location;
 
     @Column(name = "play_start_at", nullable = false)
-    private LocalDateTime playStartAt;
+    private LocalDate playStartAt;
 
     @Column(name = "play_end_at", nullable = false)
-    private LocalDateTime playEndAt;
+    private LocalDate playEndAt;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -39,5 +40,5 @@ public class Concert {
     private LocalDateTime updatedAt;
 
     @Column(name = "is_delete", nullable = false)
-    private Boolean isDeleted = false;
+    private Boolean isDelete = false;
 }

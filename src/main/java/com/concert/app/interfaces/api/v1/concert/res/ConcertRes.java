@@ -2,6 +2,7 @@ package com.concert.app.interfaces.api.v1.concert.res;
 
 import com.concert.app.domain.concert.SelectConcertResult;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,9 @@ public record ConcertRes(
             String title,         // 콘서트 제목
             String description,   // 콘서트 설명
             String location,      // 콘서트 장소
-            String playStartAt,   // 시작 시간
-            String playEndAt,     // 종료 시간
-            boolean isDeleted     // 삭제 여부
+            LocalDate playStartAt,   // 시작 시간
+            LocalDate playEndAt,     // 종료 시간
+            boolean isDelete      // 삭제 여부
     ){}
 
     public static ConcertRes of(SelectConcertResult result) {
@@ -29,7 +30,7 @@ public record ConcertRes(
                     concert.location(),
                     concert.playStartAt(),
                     concert.playEndAt(),
-                    concert.isDeleted()
+                    concert.isDelete()
             ));
         }
         return new ConcertRes(concertList);
