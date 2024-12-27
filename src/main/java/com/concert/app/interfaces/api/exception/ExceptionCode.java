@@ -23,6 +23,8 @@ public enum ExceptionCode {
     TOKEN_INVALID("401", "유효하지 않은 토큰입니다.", HttpStatus.UNAUTHORIZED),
     TOKEN_EXPIRED("401", "만료된 토큰입니다.", HttpStatus.UNAUTHORIZED),
 
+    // 콘서트 관련
+    CONCERT_SOLD_OUT("E001", "죄송합니다. 해당 콘서트는 모든 좌석이 매진된 콘서트입니다.", HttpStatus.BAD_REQUEST),
 
     E403("403", "접근할 수 없습니다.", HttpStatus.FORBIDDEN),
     E404("404", "데이터를 조회할 수 없습니다.", HttpStatus.NOT_FOUND),
