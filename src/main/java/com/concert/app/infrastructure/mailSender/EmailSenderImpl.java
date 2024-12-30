@@ -1,6 +1,6 @@
 package com.concert.app.infrastructure.mailSender;
 
-import com.concert.app.domain.mailSender.EmailSender;
+import com.concert.app.domain.emailSender.EmailSender;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;

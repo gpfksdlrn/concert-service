@@ -1,6 +1,6 @@
 package com.concert.app.interfaces.api.v1.auth;
 
-import com.concert.app.domain.mailSender.EmailSendService;
+import com.concert.app.domain.emailSender.EmailSendService;
 import com.concert.app.interfaces.api.common.CommonRes;
 import com.concert.app.interfaces.api.v1.auth.req.EmailSenderReq;
 import com.fasterxml.jackson.core.JsonProcessingException;
