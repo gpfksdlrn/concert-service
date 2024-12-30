@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**") // 인증이 필요한 경로
                 .excludePathPatterns(
                         "/api/v1/auth/**", // 로그인, 회원가입, 이메일 인증 등 인증이 필요 없는 경로
-                        "/api/v1/concerts/list", // 콘서트 조회
+                        "/api/v1/concerts/**", // 콘서트 조회
                         "/swagger-ui/**", "/v3/api-docs/**" // Swagger 관련 경로
                 );
     }

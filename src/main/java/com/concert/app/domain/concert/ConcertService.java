@@ -13,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ConcertService {
     private final ConcertRepository concertRepository;
+    private final ConcertScheduleRepository concertScheduleRepository;
 
     // 등록되어 있는 콘서트 리스트 조회
     public SelectConcertResult selectConcertList() {
@@ -32,5 +33,35 @@ public class ConcertService {
             resultConcerts.add(resultConcert);
         }
         return new SelectConcertResult(resultConcerts);
+    }
+
+    public SelectConcertScheduleResult selectConcertSchedule(Long concertId) {
+        Concert concert = concertRepository.findByIdAndNotDeleted(concertId);
+
+        List<ConcertSchedule> concertSchedules =  concertScheduleRepository.findByConcertId(concertId);
+
+        List<SelectConcertScheduleResult.Schedule> schedules = new ArrayList<>();
+        for (ConcertSchedule schedule : concertSchedules) {
+            schedules.add(new SelectConcertScheduleResult.Schedule(
+                    schedule.getId(),
+                    schedule.getScheduleAt(),
+                    schedule.getRunningTime(),
+                    schedule.getTotalSeat(),
+                    schedule.getRemainSeat(),
+                    schedule.getTotalSeatStatus()
+            ));
+        }
+
+        // SelectConcertScheduleResult 반환
+        return new SelectConcertScheduleResult(
+                concert.getId(),
+                concert.getTitle(),
+                concert.getDescription(),
+                concert.getLocation(),
+                concert.getPlayStartAt(),
+                concert.getPlayEndAt(),
+                concert.getIsDelete(),
+                schedules
+        );
     }
 }
