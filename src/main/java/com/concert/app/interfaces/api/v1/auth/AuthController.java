@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
-public class EmailAuthController {
+public class AuthController {
 
     private final EmailSendService emailSendService;
 
     // 인증 요청
     @PostMapping("/email-verification")
     public CommonRes<String> requestEmailAuth(@RequestBody EmailSenderReq req) throws Exception {
-        return emailSendService.sendEmail(req.email());
+        return CommonRes.success(emailSendService.sendEmail(req.email()));
     }
 
     // 검증
     @GetMapping("/email-verification/{token}")
     public CommonRes<String> verifyEmail(@PathVariable String token) throws JsonProcessingException {
-        return emailSendService.verifyToken(token);
+        return CommonRes.success(emailSendService.verifyToken(token));
     }
 }
