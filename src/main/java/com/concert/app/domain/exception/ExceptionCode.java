@@ -1,4 +1,4 @@
-package com.concert.app.interfaces.api.exception;
+package com.concert.app.domain.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,10 +18,17 @@ public enum ExceptionCode {
     // 회원 관련
     DUPLICATED_EMAIL("400", "이미 가입된 이메일입니다.", HttpStatus.BAD_REQUEST),
     WRONG_ADMIN_TOKEN("403", "관리자 암호가 틀려 등록이 불가능합니다.", HttpStatus.UNAUTHORIZED),
+    WRONG_PASSWORD("403", "비밀번호가 일치하지 않습니다.", HttpStatus.UNAUTHORIZED),
+    EMAIL_MISMATCH("400", "인증된 이메일과 가입 시도 이메일이 일치하지 않습니다.", HttpStatus.BAD_REQUEST),
+    EMAIL_NOT_CHECK("401", "인증이 완료된 이메일이 압니다.", HttpStatus.UNAUTHORIZED),
+    REFRESH_TOKEN_NOT_FOUND("401", "RefreshToken 이 존재하지 않습니다.", HttpStatus.UNAUTHORIZED),
 
     // JWT 에러
     TOKEN_INVALID("401", "유효하지 않은 토큰입니다.", HttpStatus.UNAUTHORIZED),
     TOKEN_EXPIRED("401", "만료된 토큰입니다.", HttpStatus.UNAUTHORIZED),
+
+    // 인증 에러
+    AUTH_ERROR("401", "인증 에러", HttpStatus.UNAUTHORIZED),
 
     // 콘서트 관련
     CONCERT_SOLD_OUT("E001", "죄송합니다. 해당 콘서트는 모든 좌석이 매진된 콘서트입니다.", HttpStatus.BAD_REQUEST),

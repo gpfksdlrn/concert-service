@@ -1,4 +1,4 @@
-package com.concert.app.interfaces.api.exception;
+package com.concert.app.domain.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

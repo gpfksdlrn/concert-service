@@ -1,4 +1,4 @@
-package com.concert.app.interfaces.api.exception;
+package com.concert.app.domain.exception;
 
 import lombok.Getter;
 import org.springframework.boot.logging.LogLevel;

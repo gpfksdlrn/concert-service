@@ -1,7 +1,7 @@
 package com.concert.app.interfaces.api.common;
 
-import com.concert.app.interfaces.api.exception.ExceptionCode;
-import com.concert.app.interfaces.api.exception.ExceptionMessage;
+import com.concert.app.domain.exception.ExceptionCode;
+import com.concert.app.domain.exception.ExceptionMessage;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpStatus;
 
