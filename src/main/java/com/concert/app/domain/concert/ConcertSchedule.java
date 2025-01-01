@@ -1,7 +1,7 @@
 package com.concert.app.domain.concert;
 
-import com.concert.app.interfaces.api.exception.ApiException;
-import com.concert.app.interfaces.api.exception.ExceptionCode;
+import com.concert.app.domain.exception.ApiException;
+import com.concert.app.domain.exception.ExceptionCode;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

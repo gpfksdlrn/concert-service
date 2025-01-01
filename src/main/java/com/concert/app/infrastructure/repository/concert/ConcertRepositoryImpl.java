@@ -2,8 +2,8 @@ package com.concert.app.infrastructure.repository.concert;
 
 import com.concert.app.domain.concert.Concert;
 import com.concert.app.domain.concert.ConcertRepository;
-import com.concert.app.interfaces.api.exception.ApiException;
-import com.concert.app.interfaces.api.exception.ExceptionCode;
+import com.concert.app.domain.exception.ApiException;
+import com.concert.app.domain.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.stereotype.Repository;
