@@ -1,9 +1,14 @@
 package com.concert.app.interfaces.api.v1.member;
 
+import com.concert.app.domain.member.LoginTokenRes;
 import com.concert.app.domain.member.MemberReq;
 import com.concert.app.domain.member.MemberService;
 import com.concert.app.domain.member.SelectMemberResult;
+import com.concert.app.interfaces.api.common.CommonRes;
+import com.concert.app.interfaces.api.v1.member.req.MemberLogOut;
+import com.concert.app.interfaces.api.v1.member.req.MemberLogin;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +24,17 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/register")
-    public SelectMemberResult registerMember(@RequestBody @Valid MemberReq memberReq) {
-        return memberService.registerMember(memberReq);
+    public CommonRes<SelectMemberResult> registerMember(@RequestBody @Valid MemberReq req) throws Exception {
+        return CommonRes.success(memberService.registerMember(req));
     }
 
+    @PostMapping("/login")
+    public CommonRes<LoginTokenRes> loginMember(@RequestBody MemberLogin req, HttpServletResponse res) {
+        return CommonRes.success(memberService.loginMember(req.email(), req.password(), res));
+    }
+
+    @PostMapping("/logout")
+    public CommonRes<String> logout(@RequestBody MemberLogOut req, HttpServletResponse res) {
+        return CommonRes.success(memberService.logoutMember(req.email(), res));
+    }
 }

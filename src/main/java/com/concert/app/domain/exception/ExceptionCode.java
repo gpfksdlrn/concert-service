@@ -22,6 +22,8 @@ public enum ExceptionCode {
     EMAIL_MISMATCH("400", "인증된 이메일과 가입 시도 이메일이 일치하지 않습니다.", HttpStatus.BAD_REQUEST),
     EMAIL_NOT_CHECK("401", "인증이 완료된 이메일이 압니다.", HttpStatus.UNAUTHORIZED),
     REFRESH_TOKEN_NOT_FOUND("401", "RefreshToken 이 존재하지 않습니다.", HttpStatus.UNAUTHORIZED),
+    REFRESH_TOKEN_INVALID("401", "유효하지 않은 RefreshToken 입니다.", HttpStatus.UNAUTHORIZED),
+    REFRESH_TOKEN_MISMATCH("401", "저장된 RefreshToken 과 일치하지 않습니다.", HttpStatus.UNAUTHORIZED),
 
     // JWT 에러
     TOKEN_INVALID("401", "유효하지 않은 토큰입니다.", HttpStatus.UNAUTHORIZED),
