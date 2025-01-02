@@ -34,6 +34,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
+        String requestURI = request.getRequestURI();
+
+        // 인증이 필요 없는 경로를 확인하고 필터를 건너뜀
+        if (requestURI.startsWith("/api/v1/auth/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         // 헤더에서 AccessToken 추출
         String authHeader = request.getHeader(AUTH_HEADER);
