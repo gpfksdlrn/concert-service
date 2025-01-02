@@ -1,8 +1,8 @@
 package com.concert.app.domain.emailSender;
 
+import com.common.exception.ApiException;
+import com.common.exception.ExceptionCode;
 import com.concert.app.domain.emailSender.dto.EmailSenderToken;
-import com.concert.app.domain.exception.ApiException;
-import com.concert.app.domain.exception.ExceptionCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;

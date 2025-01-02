@@ -1,8 +1,8 @@
 package com.concert.app.infrastructure.encryption;
 
+import com.common.exception.ApiException;
+import com.common.exception.ExceptionCode;
 import com.concert.app.domain.encryption.EncryptionUtil;
-import com.concert.app.domain.exception.ApiException;
-import com.concert.app.domain.exception.ExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.logging.LogLevel;

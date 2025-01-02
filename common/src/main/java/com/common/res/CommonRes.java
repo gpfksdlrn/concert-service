@@ -1,14 +1,15 @@
-package com.concert.app.interfaces.api.common;
+package com.common.res;
 
-import com.concert.app.domain.exception.ExceptionCode;
-import com.concert.app.domain.exception.ExceptionMessage;
+import com.common.exception.ExceptionCode;
+import com.common.exception.ExceptionMessage;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpStatus;
 
 import java.util.HashMap;
 
-import static com.concert.app.interfaces.api.common.ResultType.FAIL;
-import static com.concert.app.interfaces.api.common.ResultType.SUCCESS;
+import static com.common.res.ResultType.FAIL;
+import static com.common.res.ResultType.SUCCESS;
+
 
 public record CommonRes<T>(
         @Schema(description = "반환 결과")

@@ -1,12 +1,12 @@
 package com.concert.app.domain.member;
 
+import com.common.exception.ApiException;
+import com.common.exception.ExceptionCode;
 import com.concert.app.domain.auth.JwtProvider;
 import com.concert.app.domain.auth.RefreshTokenRepository;
 import com.concert.app.domain.emailSender.EmailCheckEnum;
 import com.concert.app.domain.emailSender.EmailSenderRepository;
 import com.concert.app.domain.encryption.EncryptionUtil;
-import com.concert.app.domain.exception.ApiException;
-import com.concert.app.domain.exception.ExceptionCode;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;

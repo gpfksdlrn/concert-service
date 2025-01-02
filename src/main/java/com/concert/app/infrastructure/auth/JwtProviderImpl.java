@@ -1,9 +1,9 @@
 package com.concert.app.infrastructure.auth;
 
+import com.common.exception.ApiException;
+import com.common.exception.ExceptionCode;
 import com.concert.app.domain.auth.JwtProvider;
 import com.concert.app.domain.auth.RefreshTokenRepository;
-import com.concert.app.domain.exception.ApiException;
-import com.concert.app.domain.exception.ExceptionCode;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;

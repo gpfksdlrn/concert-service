@@ -1,9 +1,9 @@
 package com.concert.app.interfaces.api.v1.concert;
 
+import com.common.res.CommonRes;
 import com.concert.app.domain.concert.ConcertService;
 import com.concert.app.domain.concert.SelectConcertResult;
 import com.concert.app.domain.concert.SelectConcertScheduleResult;
-import com.concert.app.interfaces.api.common.CommonRes;
 import com.concert.app.interfaces.api.v1.concert.res.ConcertRes;
 import com.concert.app.interfaces.api.v1.concert.res.ConcertScheduleRes;
 import io.swagger.v3.oas.annotations.Operation;

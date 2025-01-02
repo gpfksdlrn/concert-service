@@ -1,10 +1,10 @@
 package com.concert.app.interfaces.api.v1.member;
 
+import com.common.res.CommonRes;
 import com.concert.app.domain.member.LoginTokenRes;
 import com.concert.app.domain.member.MemberReq;
 import com.concert.app.domain.member.MemberService;
 import com.concert.app.domain.member.SelectMemberResult;
-import com.concert.app.interfaces.api.common.CommonRes;
 import com.concert.app.interfaces.api.v1.member.req.MemberLogOut;
 import com.concert.app.interfaces.api.v1.member.req.MemberLogin;
 import io.swagger.v3.oas.annotations.tags.Tag;
