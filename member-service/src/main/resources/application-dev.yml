@@ -1,0 +1,58 @@
+server:
+  port: 9003
+
+spring:
+  application:
+    name: member-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/CONCERT?characterEncoding=UTF-8&serverTimezone=Asia/Seoul&rewriteBatchedStatements=true
+    username: root
+    password: 1234
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        globally_quoted_identifiers: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: gpfksdlrn@gmail.com
+    password: xqzdxxuntlswzkib
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.debug: true
+      mail.starttls.enable: true
+
+jwt:
+  secret-key: "a76bb35027103255ae7555bb60c548b5d5c1625f73c89d1afd6dd44a0e48598e"
+  admin-token: "BBCCopqWXYzstuJLPqdeHgMNklzVcYtroD"
+  access-token-expiration: "1800000"
+  refresh-token-expiration: "604800000"
+
+encryption:
+  base64-key: "yFfEGeBYIU3znOGc17IS5Q=="
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://127.0.0.1:8761/eureka}
+
+  instance:
+    lease-renewal-interval-in-seconds: ${EUREKA_INSTANCE_LEASE_RENEWAL_INTERVAL_IN_SECONDS:10}
+    lease-expiration-duration-in-seconds: ${EUREKA_INSTANCE_LEASE_EXPIRATION_DURATION_IN_SECONDS:30}
+    prefer-ip-address: ${EUREKA_INSTANCE_PREFER_IP_ADDRESS:true}
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    non-secure-port-enabled: true
+    metadata-map:
+      instanceId: ${spring.application.name}:${random.value}
