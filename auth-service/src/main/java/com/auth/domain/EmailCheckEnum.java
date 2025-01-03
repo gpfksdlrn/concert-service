@@ -1,4 +1,4 @@
-package com.concert.app.domain.emailSender;
+package com.auth.domain;
 
 import lombok.Getter;
 

@@ -1,8 +1,8 @@
-package com.concert.app.interfaces.api.v1.auth;
+package com.auth.interfaces;
 
+import com.auth.domain.EmailSendService;
 import com.common.res.CommonRes;
-import com.concert.app.domain.emailSender.EmailSendService;
-import com.concert.app.interfaces.api.v1.auth.req.EmailSenderReq;
+import com.auth.interfaces.req.EmailSenderReq;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.concert.app.interfaces.api.v1.auth.req;
+package com.auth.interfaces.req;
 
 public record EmailSenderReq (
         String email

@@ -1,7 +1,7 @@
-package com.concert.app.infrastructure.repository.emailSender;
+package com.auth.infrastructure;
 
-import com.concert.app.domain.emailSender.EmailSenderRepository;
-import com.concert.app.domain.emailSender.dto.EmailSenderToken;
+import com.auth.domain.EmailSenderRepository;
+import com.auth.domain.dto.EmailSenderToken;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package com.concert.app.domain.emailSender.dto;
+package com.auth.domain.dto;
 
 public record EmailSenderToken(
         String email,

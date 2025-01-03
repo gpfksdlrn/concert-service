@@ -1,6 +1,6 @@
-package com.concert.app.domain.emailSender;
+package com.auth.domain;
 
-import com.concert.app.domain.emailSender.dto.EmailSenderToken;
+import com.auth.domain.dto.EmailSenderToken;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.HashMap;

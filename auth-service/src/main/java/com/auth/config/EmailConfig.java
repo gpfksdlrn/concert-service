@@ -1,4 +1,4 @@
-package com.concert.config;
+package com.auth.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
