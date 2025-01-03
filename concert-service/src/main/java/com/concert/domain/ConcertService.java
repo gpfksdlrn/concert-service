@@ -1,4 +1,4 @@
-package com.concert.app.domain.concert;
+package com.concert.domain;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

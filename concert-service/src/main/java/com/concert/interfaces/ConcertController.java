@@ -1,11 +1,11 @@
-package com.concert.app.interfaces.api.v1.concert;
+package com.concert.interfaces;
 
 import com.common.res.CommonRes;
-import com.concert.app.domain.concert.ConcertService;
-import com.concert.app.domain.concert.SelectConcertResult;
-import com.concert.app.domain.concert.SelectConcertScheduleResult;
-import com.concert.app.interfaces.api.v1.concert.res.ConcertRes;
-import com.concert.app.interfaces.api.v1.concert.res.ConcertScheduleRes;
+import com.concert.domain.ConcertService;
+import com.concert.domain.SelectConcertResult;
+import com.concert.domain.SelectConcertScheduleResult;
+import com.concert.interfaces.res.ConcertRes;
+import com.concert.interfaces.res.ConcertScheduleRes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

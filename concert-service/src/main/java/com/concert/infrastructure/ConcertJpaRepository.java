@@ -1,6 +1,6 @@
-package com.concert.app.infrastructure.repository.concert;
+package com.concert.infrastructure;
 
-import com.concert.app.domain.concert.Concert;
+import com.concert.domain.Concert;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

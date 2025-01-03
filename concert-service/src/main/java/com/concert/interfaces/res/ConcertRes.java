@@ -1,6 +1,6 @@
-package com.concert.app.interfaces.api.v1.concert.res;
+package com.concert.interfaces.res;
 
-import com.concert.app.domain.concert.SelectConcertResult;
+import com.concert.domain.SelectConcertResult;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

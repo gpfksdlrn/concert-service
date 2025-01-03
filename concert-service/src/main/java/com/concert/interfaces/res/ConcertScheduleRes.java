@@ -1,7 +1,7 @@
-package com.concert.app.interfaces.api.v1.concert.res;
+package com.concert.interfaces.res;
 
-import com.concert.app.domain.concert.SelectConcertScheduleResult;
-import com.concert.app.domain.concert.TotalSeatStatus;
+import com.concert.domain.SelectConcertScheduleResult;
+import com.concert.domain.TotalSeatStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

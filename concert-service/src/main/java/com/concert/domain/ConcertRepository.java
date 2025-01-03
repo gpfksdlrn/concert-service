@@ -1,4 +1,4 @@
-package com.concert.app.domain.concert;
+package com.concert.domain;
 
 import java.time.LocalDate;
 import java.util.List;

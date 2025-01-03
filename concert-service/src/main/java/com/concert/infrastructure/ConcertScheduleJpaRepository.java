@@ -1,6 +1,6 @@
-package com.concert.app.infrastructure.repository.concert;
+package com.concert.infrastructure;
 
-import com.concert.app.domain.concert.ConcertSchedule;
+import com.concert.domain.ConcertSchedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
