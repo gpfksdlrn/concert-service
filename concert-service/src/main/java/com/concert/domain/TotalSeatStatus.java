@@ -1,4 +1,4 @@
-package com.concert.app.domain.concert;
+package com.concert.domain;
 
 public enum TotalSeatStatus {
     SOLD_OUT,
