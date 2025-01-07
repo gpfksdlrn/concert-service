@@ -20,7 +20,7 @@ public enum ExceptionCode {
     WRONG_ADMIN_TOKEN("403", "관리자 암호가 틀려 등록이 불가능합니다.", HttpStatus.UNAUTHORIZED),
     WRONG_PASSWORD("403", "비밀번호가 일치하지 않습니다.", HttpStatus.UNAUTHORIZED),
     EMAIL_MISMATCH("400", "인증된 이메일과 가입 시도 이메일이 일치하지 않습니다.", HttpStatus.BAD_REQUEST),
-    EMAIL_NOT_CHECK("401", "인증이 완료된 이메일이 압니다.", HttpStatus.UNAUTHORIZED),
+    EMAIL_NOT_CHECK("401", "인증이 완료되지 않은 이메일입니다.", HttpStatus.UNAUTHORIZED),
     REFRESH_TOKEN_NOT_FOUND("401", "RefreshToken 이 존재하지 않습니다.", HttpStatus.UNAUTHORIZED),
     REFRESH_TOKEN_INVALID("401", "유효하지 않은 RefreshToken 입니다.", HttpStatus.UNAUTHORIZED),
     REFRESH_TOKEN_MISMATCH("401", "저장된 RefreshToken 과 일치하지 않습니다.", HttpStatus.UNAUTHORIZED),
@@ -34,6 +34,10 @@ public enum ExceptionCode {
 
     // 콘서트 관련
     CONCERT_SOLD_OUT("E001", "죄송합니다. 해당 콘서트는 모든 좌석이 매진된 콘서트입니다.", HttpStatus.BAD_REQUEST),
+
+    // 포인트 충전 최대 금액 초과
+    MAX_CHARGE_POINT("400", "충전 가능한 금액(10만원) 을 초과하였습니다.", HttpStatus.BAD_REQUEST),
+    MIN_CHARGE_POINT("400", "충전 가능한 최소금액(10원)의 이하입니다.", HttpStatus.BAD_REQUEST),
 
     E403("403", "접근할 수 없습니다.", HttpStatus.FORBIDDEN),
     E404("404", "데이터를 조회할 수 없습니다.", HttpStatus.NOT_FOUND),

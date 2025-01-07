@@ -86,7 +86,7 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public LoginTokenResult loginMember(String email, String password, HttpServletResponse res) {
+    public void loginMember(String email, String password, HttpServletResponse res) {
         // 이메일 암호화
         String encodingEmail = encryptionUtil.encrypt(email);
 
@@ -102,21 +102,20 @@ public class MemberService {
         String accessToken = jwtProvider.generateAccessToken(member.getEmail());
         String refreshToken = jwtProvider.generateRefreshToken(member.getEmail());
 
-        // 클라이언트가 Authorization 헤더로 AccessToken을 사용할 수 있도록 설정
+        // Access Token은 헤더로 전달
         res.setHeader("Authorization", "Bearer " + accessToken);
 
-        // RefreshToken 을 HttpOnly 쿠키에 저장
+        // Refresh Token은 HttpOnly 쿠키로 저장
         setRefreshTokenCookie(res, refreshToken);
-        // Redis 에 RefreshToken 저장
-        refreshTokenRepository.storeRefreshToken(email, refreshToken);
 
-        return new LoginTokenResult(accessToken, refreshToken);
+        // Redis에 Refresh Token 저장
+        refreshTokenRepository.storeRefreshToken(member.getEmail(), refreshToken);
     }
 
     public void setRefreshTokenCookie(HttpServletResponse response, String refreshToken) {
         Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
         refreshTokenCookie.setHttpOnly(true); // JavaScript 접근 금지
-        refreshTokenCookie.setSecure(true); // HTTPS에서만 사용
+        // refreshTokenCookie.setSecure(true); // HTTPS에서만 사용
         refreshTokenCookie.setPath("/");
         refreshTokenCookie.setMaxAge(7 * 24 * 60 * 60); // 7일
         response.addCookie(refreshTokenCookie);
@@ -131,18 +130,70 @@ public class MemberService {
         }
 
         // 쿠키 만료
-        invalidateRefreshTokenCookie(res);
+        invalidateRefreshTokenCookie(res, refreshToken);
 
         return "로그아웃 완료";
     }
 
-    private void invalidateRefreshTokenCookie(HttpServletResponse res) {
-        Cookie cookie = new Cookie("refreshToken", null);
+    private void invalidateRefreshTokenCookie(HttpServletResponse res, String refreshToken) {
+        Cookie cookie = new Cookie("refreshToken", refreshToken);
         cookie.setHttpOnly(true);
+        cookie.setDomain("localhost"); // 도메인 설정
         cookie.setPath("/");
-        cookie.setMaxAge(0); // 만료 시간 0으로 설정 → 즉시 만료
+        cookie.setMaxAge(7 * 24 * 60 * 60); // 만료시간 7일
         // 필요하다면 secure 옵션도 적용
         // cookie.setSecure(true);
         res.addCookie(cookie);
+    }
+
+    public SelectMemberInfoResult selectMemberInfo(String token) {
+        // 토큰에서 이메일 추출
+        String encodeEmail = jwtProvider.getEmailFromToken(token);
+        String email = encryptionUtil.decrypt(encodeEmail);
+        Member member = memberRepository.findByEmail(encodeEmail);
+
+        return new SelectMemberInfoResult(
+                email,
+                encryptionUtil.decrypt(member.getName()),
+                encryptionUtil.decrypt(member.getPhoneNumber()),
+                encryptionUtil.decrypt(member.getAddress1()),
+                encryptionUtil.decrypt(member.getAddress2()),
+                member.getBalance(),
+                member.getRole() == Member.UserRoleEnum.ADMIN
+        );
+    }
+
+    public void refreshAccessToken(String refreshToken, HttpServletResponse res) {
+        if(refreshToken == null) {
+            throw new ApiException(ExceptionCode.REFRESH_TOKEN_NOT_FOUND, LogLevel.ERROR);
+        }
+
+        // Refresh Token 검증 및 새로운 Access Token 발급
+        String newAccessToken = jwtProvider.refreshAccessToken(refreshToken);
+
+        // Access Token 헤더에 설정
+        res.setHeader("Authorization", "Bearer " + newAccessToken);
+    }
+
+    @Transactional
+    public ChargeMemberPointResult chargeMemberPoint(String token, Long point) {
+        // 토큰에서 이메일 추출
+        String encodeEmail = jwtProvider.getEmailFromToken(token);
+        Member member = memberRepository.findByEmail(encodeEmail);
+
+        // 최대 충전 금액 체크 (10만원)
+        if(member.getBalance() + point > 100000) {
+            throw new ApiException(ExceptionCode.MAX_CHARGE_POINT, LogLevel.ERROR);
+        }
+
+        // 최소 충전 금액 체크 (10원)
+        if(point < 10) {
+            throw new ApiException(ExceptionCode.MIN_CHARGE_POINT, LogLevel.ERROR);
+        }
+
+        // 포인트 충전
+        member.chargePoint(point);
+
+        return new ChargeMemberPointResult(member.getId(), point, member.getBalance());
     }
 }

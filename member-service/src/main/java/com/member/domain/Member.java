@@ -51,6 +51,10 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private UserRoleEnum role = UserRoleEnum.USER;
 
+    public void chargePoint(Long chargePoint) {
+        this.balance += chargePoint;
+    }
+
     public enum UserRoleEnum {
         USER, ADMIN
     }

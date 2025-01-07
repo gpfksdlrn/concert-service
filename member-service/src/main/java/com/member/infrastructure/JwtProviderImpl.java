@@ -4,6 +4,7 @@ import com.common.exception.ApiException;
 import com.common.exception.ExceptionCode;
 import com.member.domain.JwtProvider;
 import com.member.domain.RefreshTokenRepository;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -22,6 +23,7 @@ public class JwtProviderImpl implements JwtProvider {
 
     private static Key key; // JWT 서명 키를 위한 정적 변수
     private final RefreshTokenRepository refreshTokenRepository;
+    private static final String BEARER_PREFIX = "Bearer ";
 
     @Value("${jwt.secret-key}")
     private String secretKeyString; // JWT 키를 가져오는 필드
@@ -45,7 +47,7 @@ public class JwtProviderImpl implements JwtProvider {
     @Override
     public String generateAccessToken(String email) {
         return Jwts.builder()
-                .setSubject(email) // email을 subject로 설정
+                .claim("email", email) // email을 claim으로 설정
                 .setIssuedAt(new Date()) // 토큰 발행 시간
                 .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpiration)) // 만료 시간
                 .claim("type", "accessToken") // 토큰 타입
@@ -61,7 +63,7 @@ public class JwtProviderImpl implements JwtProvider {
     @Override
     public String generateRefreshToken(String email) {
         return Jwts.builder()
-                .setSubject(email) // email을 subject로 설정
+                .claim("email", email) // email을 claim으로 설정
                 .setIssuedAt(new Date()) // 토큰 발행 시간
                 .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpiration)) // 만료 시간
                 .claim("type", "refreshToken") // 토큰 타입
@@ -95,12 +97,15 @@ public class JwtProviderImpl implements JwtProvider {
      */
     @Override
     public String getEmailFromToken(String token) {
-        return Jwts.parserBuilder()
+        token = token.substring(BEARER_PREFIX.length());
+
+        Claims claims = Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+                .getBody();
+
+        return claims.get("email", String.class);
     }
 
     /**
@@ -114,7 +119,7 @@ public class JwtProviderImpl implements JwtProvider {
             throw new ApiException(ExceptionCode.REFRESH_TOKEN_INVALID, LogLevel.ERROR);
         }
 
-        String email = getEmailFromToken(refreshToken);
+        String email = getEmailFromToken("Bearer " + refreshToken);
 
         // Redis 에서 RefreshToken 검증
         String storedRefreshToken = refreshTokenRepository.getRefreshToken(email);
